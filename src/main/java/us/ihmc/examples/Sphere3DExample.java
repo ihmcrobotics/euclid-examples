@@ -25,7 +25,7 @@ public class Sphere3DExample extends Application
       cameraController.setMinLatitude(Double.NEGATIVE_INFINITY);
       cameraController.setMaxLatitude(Double.POSITIVE_INFINITY);
       view3dFactory.addWorldCoordinateSystem(0.4); //determines size of axes 
-      view3dFactory.addNodeToView(new AmbientLight(Color.MAGENTA));
+      view3dFactory.addNodeToView(new AmbientLight(Color.BLUE));
       view3dFactory.addPointLight(-10.0, 0.0, 1.0, Color.WHEAT);
 
       Sphere3D sphere3D = new Sphere3D();
@@ -49,9 +49,7 @@ public class Sphere3DExample extends Application
       javaFXSphereNode.setMaterial(new PhongMaterial(color)); // Give some color to the box
       view3dFactory.addNodeToView(javaFXSphereNode);
       
-      // Add stuff here.
-      //view3dFactory.addNodeToView(new Box(0.1, 0.1, 0.1));
-
+     
       primaryStage.setTitle(getClass().getSimpleName());
       primaryStage.setMaximized(true);
       primaryStage.setScene(view3dFactory.getScene());

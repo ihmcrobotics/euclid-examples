@@ -36,7 +36,7 @@ public class Box3DExample extends Application
       double y = 0.2;
       double z = 0.3;
       double yaw = Math.PI / 4.0;
-      double pitch = Math.toRadians(10.0);
+      double pitch = Math.toRadians(50.0);
       double roll = Math.toRadians(25.0);
       Pose3D pose = new Pose3D(x, y, z, yaw, pitch, roll);
       double sizeX = 0.25;
