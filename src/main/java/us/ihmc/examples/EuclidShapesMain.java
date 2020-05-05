@@ -2,7 +2,11 @@ package us.ihmc.examples;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.AmbientLight;
+import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
@@ -14,13 +18,17 @@ import us.ihmc.graphicsDescription.MeshDataHolder;
 import us.ihmc.javaFXToolkit.cameraControllers.FocusBasedCameraMouseEventHandler;
 import us.ihmc.javaFXToolkit.graphics.JavaFXMeshDataInterpreter;
 import us.ihmc.javaFXToolkit.scenes.View3DFactory;
+import us.ihmc.javaFXToolkit.scenes.View3DFactory.SceneType;
 
-public class Sphere3DExample extends Application
+public class EuclidShapesMain extends Application
 {
    @Override
    public void start(Stage primaryStage) throws Exception
    {
-      View3DFactory view3dFactory = new View3DFactory(600, 400);
+	   FXMLLoader loader = new FXMLLoader(getClass().getResource("EuclidShapes.fxml"));
+	   BorderPane primaryPane = loader.load();
+	 
+      View3DFactory view3dFactory = new View3DFactory(600, 400, true, SceneAntialiasing.BALANCED, SceneType.SUB_SCENE);
       FocusBasedCameraMouseEventHandler cameraController = view3dFactory.addCameraController(0.001, 100.0, true);
       cameraController.setMinLatitude(Double.NEGATIVE_INFINITY);
       cameraController.setMaxLatitude(Double.POSITIVE_INFINITY);
@@ -34,8 +42,7 @@ public class Sphere3DExample extends Application
       double centery = 0;
       double centerz = 0; 
       double radius = .1; 
-      int nLatitude = 100; // These latitudes seem to affect the number of triangles used in the mesh
-      //the higher this number the rounder the sphere becomes
+      int nLatitude = 100; 
       int sLatitude = 100;
       sphere3D.set(centerx,centery,centerz,radius);
       sphere3D.getPose(); //sets pose to null
@@ -46,13 +53,14 @@ public class Sphere3DExample extends Application
       TriangleMesh javaFXMesh = JavaFXMeshDataInterpreter.interpretMeshData(mesh);
       MeshView javaFXSphereNode = new MeshView(javaFXMesh);
       Color color = Color.PINK;
-      javaFXSphereNode.setMaterial(new PhongMaterial(color)); // Give some color to the box
+      javaFXSphereNode.setMaterial(new PhongMaterial(color));
       view3dFactory.addNodeToView(javaFXSphereNode);
       
-     
+      primaryPane.setCenter(view3dFactory.getSubScene());
+      
       primaryStage.setTitle(getClass().getSimpleName());
       primaryStage.setMaximized(true);
-      primaryStage.setScene(view3dFactory.getScene());
+      primaryStage.setScene(new Scene(primaryPane));
       primaryStage.setOnCloseRequest(event -> stop());
       primaryStage.show();
    }
