@@ -9,9 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class ApplicationMain extends Application
-{
-	Shape3DBasics basic = new Shape3DBasics();
-	public Stage primaryStage;
+{	
 	
    @Override
    public void start(Stage primaryStage) throws Exception
@@ -20,13 +18,9 @@ public class ApplicationMain extends Application
 	   BorderPane primaryPane = loader.load();
 	   Pane modelPane = new Pane();
 	   
-	   
-	  
 	   primaryPane.setCenter(modelPane);
        modelPane.getChildren().add(Shape3DBasics.view3dFactory.getSubScene());
       
-      
-     
       primaryStage.setTitle(getClass().getSimpleName());
       primaryStage.setScene(new Scene(primaryPane));
       Shape3DBasics.view3dFactory.getSubScene().heightProperty().bind(modelPane.heightProperty());
