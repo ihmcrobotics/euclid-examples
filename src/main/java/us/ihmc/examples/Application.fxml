@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="us.ihmc.examples.ApplicationController"> 
+
+   <bottom>
+      <Pane maxHeight="15.0" minHeight="15.0" prefHeight="15.0" prefWidth="600.0" BorderPane.alignment="BOTTOM_CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin></Pane>
+   </bottom>
+   <left>
+      <Pane maxWidth="-Infinity" prefHeight="346.0" prefWidth="15.0" BorderPane.alignment="CENTER_LEFT" />
+   </left>
+   <right>
+      <Pane minWidth="238.0" prefWidth="238.0" BorderPane.alignment="CENTER_RIGHT">
+         <children>
+            <VBox prefHeight="521.0" prefWidth="236.0">
+               <children>
+                  <MenuButton fx:id="shapeMenuButton" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Shape">
+                    <items>
+                      <MenuItem fx:id="capsule" mnemonicParsing="false" onAction="#makeCapsule" text="Capsule" />
+                      <MenuItem fx:id="cube" mnemonicParsing="false" onAction="#makeCube" text="Cube" />
+                        <MenuItem fx:id="cylinder" mnemonicParsing="false" onAction="#makeCylinder" text="Cylinder" />
+                        <MenuItem fx:id="ellipsoid" mnemonicParsing="false" onAction="#makeEllipsoid" text="Ellipsoid" />
+                        <MenuItem fx:id="ramp" mnemonicParsing="false" onAction="#makeRamp" text="Ramp" />
+                        <MenuItem fx:id="sphere" mnemonicParsing="false" onAction="#makeSphere" text="Sphere" />
+                        <MenuItem fx:id="torus" mnemonicParsing="false" onAction="#makeTorus" text="Torus" />
+                    </items>
+                     <VBox.margin>
+                        <Insets bottom="6.0" left="15.0" right="6.0" />
+                     </VBox.margin>
+                  </MenuButton>
+                  <MenuButton fx:id="colorMenuButton" alignment="CENTER" layoutX="25.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Color">
+                     <items>
+                        <MenuItem fx:id="red" mnemonicParsing="false" onAction="#red" onMenuValidation="#initialize" text="Red" />
+                        <MenuItem fx:id="orange" mnemonicParsing="false" onAction="#orange" text="Orange" />
+                        <MenuItem fx:id="yellow" mnemonicParsing="false" onAction="#yellow" text="Yellow" />
+                        <MenuItem fx:id="green" mnemonicParsing="false" onAction="#green" text="Green" />
+                        <MenuItem fx:id="blue" mnemonicParsing="false" onAction="#blue" text="Blue" />
+                        <MenuItem fx:id="purple" mnemonicParsing="false" onAction="#purple" text="Purple" />
+                        <MenuItem fx:id="black" mnemonicParsing="false" onAction="#black" text="Black" />
+                     </items>
+                     <VBox.margin>
+                        <Insets left="135.0" top="-32.0" />
+                     </VBox.margin>
+                  </MenuButton>
+                  <Separator prefHeight="9.0" prefWidth="236.0">
+                     <VBox.margin>
+                        <Insets bottom="6.0" left="15.0" right="6.0" top="10.0" />
+                     </VBox.margin>
+                  </Separator>
+                  <Label text="Position" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="6.0" left="15.0" right="6.0" top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField alignment="CENTER" onMouseClicked="#update" prefHeight="25.0" prefWidth="32.0" promptText="x" fx:id="xPosition">
+                     <VBox.margin>
+                        <Insets left="90.0" right="115.0" top="-30.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="yPosition" alignment="CENTER" layoutX="100.0" layoutY="60.0" prefHeight="25.0" prefWidth="32.0" promptText="y">
+                     <VBox.margin>
+                        <Insets left="140.0" right="65.0" top="-25.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="zPosition" alignment="CENTER" layoutX="100.0" layoutY="60.0" prefHeight="25.0" prefWidth="32.0" promptText="z">
+                     <VBox.margin>
+                        <Insets left="190.0" right="15.0" top="-25.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label layoutX="25.0" layoutY="64.0" prefHeight="20.0" prefWidth="71.0" text="Height" textAlignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="15.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Slider fx:id="heightSlider" blockIncrement="0.1" majorTickUnit="0.2" max="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.2">
+                     <VBox.margin>
+                        <Insets left="60.0" right="10.0" top="-15.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label layoutX="25.0" layoutY="95.0" prefHeight="20.0" prefWidth="71.0" text="Width" textAlignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="15.0" top="6.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Slider fx:id="widthSlider" blockIncrement="0.1" layoutX="70.0" layoutY="100.0" majorTickUnit="0.2" max="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.2">
+                     <VBox.margin>
+                        <Insets left="60.0" right="10.0" top="-15.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label layoutX="25.0" layoutY="120.0" prefHeight="20.0" prefWidth="71.0" text="Length" textAlignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="15.0" right="15.0" top="6.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Slider fx:id="lengthSlider" blockIncrement="0.1" layoutX="70.0" layoutY="125.0" majorTickUnit="0.2" max="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.2">
+                     <VBox.margin>
+                        <Insets left="60.0" right="10.0" top="-15.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label layoutX="25.0" layoutY="145.0" prefHeight="20.0" prefWidth="71.0" text="Radius" textAlignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="15.0" top="6.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Slider fx:id="radiusSlider" blockIncrement="0.1" layoutX="70.0" layoutY="150.0" majorTickUnit="0.2" max="1.0" minorTickCount="10" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.2">
+                     <VBox.margin>
+                        <Insets left="60.0" right="10.0" top="-15.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label layoutX="25.0" layoutY="233.0" prefHeight="20.0" prefWidth="41.0" text="Yaw" textAlignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="15.0" top="10.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </Label>
+                  <Slider fx:id="yawSlider" blockIncrement="15.0" layoutX="70.0" layoutY="245.0" majorTickUnit="30.0" max="360.0" minorTickCount="0" prefHeight="38.0" prefWidth="165.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                     <VBox.margin>
+                        <Insets left="60.0" right="10.0" top="-20.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Slider fx:id="rollSlider" blockIncrement="15.0" layoutX="70.0" layoutY="293.0" majorTickUnit="30.0" max="360.0" minorTickCount="0" prefHeight="38.0" prefWidth="165.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                     <VBox.margin>
+                        <Insets left="60.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Slider fx:id="pitchSlider" blockIncrement="15.0" layoutX="70.0" layoutY="270.0" majorTickUnit="30.0" max="360.0" minorTickCount="0" prefHeight="38.0" prefWidth="165.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                     <VBox.margin>
+                        <Insets left="60.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Slider>
+                  <Label layoutX="25.0" layoutY="288.0" prefHeight="20.0" prefWidth="71.0" text="Pitch" textAlignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="15.0" top="-45.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="25.0" layoutY="331.0" prefHeight="20.0" prefWidth="71.0" text="Roll" textAlignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="15.0" top="-65.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </Pane>
+   </right>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+   <effect>
+      <Lighting>
+         <bumpInput>
+            <Shadow />
+         </bumpInput>
+         <light>
+            <Light.Distant />
+         </light>
+      </Lighting>
+   </effect>
+   <top>
+      <TitledPane alignment="TOP_CENTER" animated="false" collapsible="false" contentDisplay="CENTER" prefHeight="20.0" prefWidth="600.0" text="Euclid 3D Shape Modeling" textAlignment="RIGHT" BorderPane.alignment="TOP_CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+         <font>
+            <Font name="Cambria Bold" size="15.0" />
+         </font>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
+      </TitledPane>
+   </top>
+   <center>
+      <Pane prefHeight="300.0" prefWidth="298.0" BorderPane.alignment="CENTER" />
+   </center>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</BorderPane>
