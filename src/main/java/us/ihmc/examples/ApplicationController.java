@@ -14,8 +14,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class ApplicationController extends ShapeFactory3D
+//these two should be separate
 {
-
+//controller should really just have the controls and a bunch of methods
    @FXML
    public Pane modelPane;
 
@@ -504,6 +505,9 @@ public class ApplicationController extends ShapeFactory3D
       yawSlider.adjustValue(0);
    }
    
+   
+   //look at type naming conventions. Capital letters! Static! add underscores where necessary
+   // THIS_IS_A_CONSTANT ie CAPSULE, CUBE, ETC
    public enum shapes
    {
       Capsule, Cube, Cylinder, Ellipsoid, Ramp, Sphere, Torus
