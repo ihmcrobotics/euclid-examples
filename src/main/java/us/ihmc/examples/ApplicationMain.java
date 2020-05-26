@@ -8,20 +8,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+//add resources folder for fxml file, put in correct place
+
 public class ApplicationMain extends Application
 {
    ShapeFactory3D shapeFactory3D = new ShapeFactory3D();
-   //ShapeFactory3DListeners listeners = new ShapeFactory3DListeners();
-
    @Override
    public void start(Stage primaryStage) throws Exception
    {
-      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Application.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Application.fxml"));
       BorderPane primaryPane = loader.load(); //get loader controller
-      @SuppressWarnings("unused")
-      ApplicationController applicationController = loader.getController();
-      //applicationController.
-      //should return application controller
+      ApplicationController applicationController = loader.getController(); //should return application controller
       //should allow us to call the controller in separate classes and return data
       Pane modelPane = new Pane();
 
@@ -34,11 +31,6 @@ public class ApplicationMain extends Application
       shapeFactory3D.view3dFactory.getSubScene().widthProperty().bind(modelPane.widthProperty());
       primaryStage.setOnCloseRequest(event -> stop());
       primaryStage.show();
-      
-//      listeners.shapeListener();
-//      listeners.textFieldListener();
-//      listeners.sliderListener();
-//      listeners.colorListener();
 
    }
 

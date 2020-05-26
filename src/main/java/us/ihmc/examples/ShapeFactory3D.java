@@ -26,21 +26,19 @@ import us.ihmc.javaFXToolkit.scenes.View3DFactory.SceneType;
 public class ShapeFactory3D
 {
 
-   ShapeFactory3DVariables v = new ShapeFactory3DVariables();
-
-   //   public double length;
-   //   public double height;
-   //   public double width;
-   //   public double radius;
-   //   public double yaw;
-   //   public double pitch;
-   //   public double roll;
-   //   public double x;
-   //   public double y;
-   //   public double z;
-   //   public double xRadius;
-   //   public double yRadius;
-   //   public double zRadius;
+   public double length;
+   public double height;
+   public double width;
+   public double radius;
+   public double yaw;
+   public double pitch;
+   public double roll;
+   public double x;
+   public double y;
+   public double z;
+   public double xRadius;
+   public double yRadius;
+   public double zRadius;
    public double minorRadius;
    public double startAngle;
    public double endAngle;
@@ -56,15 +54,11 @@ public class ShapeFactory3D
    public MeshView javaFXCylinderNode;
    public MeshView javaFXCubeNode;
    public MeshView javaFXCapsuleNode;
-
+   
    public View3DFactory view3dFactory = new View3DFactory(298, 300, true, SceneAntialiasing.BALANCED, SceneType.SUB_SCENE);
-
-   //   ApplicationController.yawSlider.setDisable(true);
 
    public void makeNewView3DFactory()
    {
-      //ApplicationController.class.getMethod(clear3DSpace, parameterTypes)
-      //applicationController.yawSlider.setDisable(true);
       colorTransparencyTest();
       FocusBasedCameraMouseEventHandler cameraController = view3dFactory.addCameraController(0.001, 100.0, true);
       cameraController.setMinLatitude(Double.NEGATIVE_INFINITY);
@@ -81,10 +75,9 @@ public class ShapeFactory3D
       {
          view3dFactory.getRoot().getChildren().clear();
       }
-      else
-      {
-         view3dFactory.getRoot().getChildren().clear();
-         view3dFactory.getRoot().getChildren().add(saveNode);
+      else {
+      view3dFactory.getRoot().getChildren().clear();
+      view3dFactory.getRoot().getChildren().add(saveNode);
       }
    }
 
@@ -98,13 +91,13 @@ public class ShapeFactory3D
 
    public void modelSphere()
    {
-      //we want a method that takes in a sphere and spits out a mesh view. Need a method that takes any shape
+//we want a method that takes in a sphere and spits out a mesh view. Need a method that takes any shape
       //spits out the correct meshview for it
       makeNewView3DFactory();
       Sphere3D sphere3D = new Sphere3D();
-      sphere3D.set(v.x, v.y, v.z, v.radius);
+      sphere3D.set(x, y, z, radius);
 
-      MeshDataHolder mesh = MeshDataGenerator.Sphere(v.radius, N, S);
+      MeshDataHolder mesh = MeshDataGenerator.Sphere(radius, N, S);
       mesh = MeshDataHolder.translate(mesh, sphere3D.getPosition());
 
       TriangleMesh javaFXMesh = JavaFXMeshDataInterpreter.interpretMeshData(mesh);
@@ -121,10 +114,10 @@ public class ShapeFactory3D
       makeNewView3DFactory();
 
       Box3D box3D = new Box3D();
-      Pose3D pose = new Pose3D(v.x, v.y, v.z, v.yaw, v.pitch, v.roll);
-      box3D.set(pose, v.length, v.width, v.height);
+      Pose3D pose = new Pose3D(x, y, z, yaw, pitch, roll);
+      box3D.set(pose, length, width, height);
 
-      MeshDataHolder mesh = MeshDataGenerator.Cube(v.length, v.width, v.height, true);
+      MeshDataHolder mesh = MeshDataGenerator.Cube(length, width, height, true);
       mesh = MeshDataHolder.rotate(mesh, new AxisAngle(box3D.getOrientation()));
       mesh = MeshDataHolder.translate(mesh, box3D.getPosition());
 
@@ -142,10 +135,10 @@ public class ShapeFactory3D
       makeNewView3DFactory();
 
       Ramp3D ramp3D = new Ramp3D();
-      Pose3D pose = new Pose3D(v.x, v.y, v.z, v.yaw, v.pitch, v.roll);
-      ramp3D.set(pose, v.length, v.width, v.height);
+      Pose3D pose = new Pose3D(x, y, z, yaw, pitch, roll);
+      ramp3D.set(pose, length, width, height);
 
-      MeshDataHolder mesh = MeshDataGenerator.Wedge(v.length, v.width, v.height);
+      MeshDataHolder mesh = MeshDataGenerator.Wedge(length, width, height);
       mesh = MeshDataHolder.rotate(mesh, new AxisAngle(ramp3D.getOrientation()));
       mesh = MeshDataHolder.translate(mesh, ramp3D.getPosition());
 
@@ -164,12 +157,12 @@ public class ShapeFactory3D
 
       Capsule3D capsule3D = new Capsule3D();
 
-      capsule3D.getPosition().setX(v.x);
-      capsule3D.getPosition().setY(v.y);
-      capsule3D.getPosition().setZ(v.z);
-      capsule3D.set(capsule3D.getPosition(), capsule3D.getAxis(), v.length, v.radius);
+      capsule3D.getPosition().setX(x);
+      capsule3D.getPosition().setY(y);
+      capsule3D.getPosition().setZ(z);
+      capsule3D.set(capsule3D.getPosition(), capsule3D.getAxis(), length, radius);
 
-      MeshDataHolder mesh = MeshDataGenerator.Capsule(v.height, v.width, v.length, v.radius, 100, 100);
+      MeshDataHolder mesh = MeshDataGenerator.Capsule(height, width, length, radius, 100, 100);
       mesh = MeshDataHolder.translate(mesh, capsule3D.getPosition());
 
       TriangleMesh javaFXMesh = JavaFXMeshDataInterpreter.interpretMeshData(mesh);
@@ -186,13 +179,13 @@ public class ShapeFactory3D
       makeNewView3DFactory();
 
       Cylinder3D cylinder3D = new Cylinder3D();
-      cylinder3D.set(cylinder3D.getPosition(), cylinder3D.getAxis(), v.height, v.radius);
+      cylinder3D.set(cylinder3D.getPosition(), cylinder3D.getAxis(), height, radius);
+      
+      cylinder3D.getPosition().setX(x);
+      cylinder3D.getPosition().setY(y);
+      cylinder3D.getPosition().setZ(z);
 
-      cylinder3D.getPosition().setX(v.x);
-      cylinder3D.getPosition().setY(v.y);
-      cylinder3D.getPosition().setZ(v.z);
-
-      MeshDataHolder mesh = MeshDataGenerator.Cylinder(v.radius, v.height, N);
+      MeshDataHolder mesh = MeshDataGenerator.Cylinder(radius, height, N);
       mesh = MeshDataHolder.translate(mesh, cylinder3D.getPosition());
 
       TriangleMesh javaFXMesh = JavaFXMeshDataInterpreter.interpretMeshData(mesh);
@@ -211,10 +204,10 @@ public class ShapeFactory3D
 
       Ellipsoid3D ellipsoid3D = new Ellipsoid3D();
 
-      Pose3D pose = new Pose3D(v.x, v.y, v.z, v.yaw, v.pitch, v.roll);
-      ellipsoid3D.set(pose, v.height, v.width, v.length);
+      Pose3D pose = new Pose3D(x, y, z, yaw, pitch, roll);
+      ellipsoid3D.set(pose, height, width, length);
 
-      MeshDataHolder mesh = MeshDataGenerator.Ellipsoid(v.height, v.width, v.length, 100, 100);
+      MeshDataHolder mesh = MeshDataGenerator.Ellipsoid(height, width, length, 100, 100);
       mesh = MeshDataHolder.translate(mesh, ellipsoid3D.getPosition());
       mesh = MeshDataHolder.rotate(mesh, new AxisAngle(ellipsoid3D.getOrientation()));
 
@@ -236,13 +229,13 @@ public class ShapeFactory3D
       //height -> radius
       //width -> minorRadius
 
-      torus3D.getPosition().setX(v.x);
-      torus3D.getPosition().setY(v.y);
-      torus3D.getPosition().setZ(v.z);
+      torus3D.getPosition().setX(x);
+      torus3D.getPosition().setY(y);
+      torus3D.getPosition().setZ(z);
 
-      torus3D.set(torus3D.getPosition(), torus3D.getAxis(), v.height, v.width);
+      torus3D.set(torus3D.getPosition(), torus3D.getAxis(), height, width);
 
-      MeshDataHolder mesh = MeshDataGenerator.ArcTorus(0, 360, v.height, v.width, 600);
+      MeshDataHolder mesh = MeshDataGenerator.ArcTorus(0, 360, height, width, 600);
       mesh = MeshDataHolder.translate(mesh, torus3D.getPosition());
 
       TriangleMesh javaFXMesh = JavaFXMeshDataInterpreter.interpretMeshData(mesh);
