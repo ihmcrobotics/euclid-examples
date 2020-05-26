@@ -54,8 +54,8 @@ public class ShapeFactory3D
    public MeshView javaFXCylinderNode;
    public MeshView javaFXCubeNode;
    public MeshView javaFXCapsuleNode;
-   
-   public View3DFactory view3dFactory = new View3DFactory(298, 300, true, SceneAntialiasing.BALANCED, SceneType.SUB_SCENE);
+
+   public static View3DFactory view3dFactory = new View3DFactory(298, 300, true, SceneAntialiasing.BALANCED, SceneType.SUB_SCENE);
 
    public void makeNewView3DFactory()
    {
@@ -91,8 +91,7 @@ public class ShapeFactory3D
 
    public void modelSphere()
    {
-//we want a method that takes in a sphere and spits out a mesh view. Need a method that takes any shape
-      //spits out the correct meshview for it
+
       makeNewView3DFactory();
       Sphere3D sphere3D = new Sphere3D();
       sphere3D.set(x, y, z, radius);
